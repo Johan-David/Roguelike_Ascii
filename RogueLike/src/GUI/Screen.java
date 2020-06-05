@@ -1,7 +1,8 @@
 package GUI;
 
-import java.awt.event.KeyEvent;
 import asciiPanel.AsciiPanel;
+
+import java.awt.event.KeyEvent;
 
 public interface Screen {
     public void displayOutput(AsciiPanel terminal);
