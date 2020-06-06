@@ -24,9 +24,9 @@ public class Game extends JFrame implements KeyListener {
     }
 
     private void createWorld(){
-        world = new WorldBuilder(20, 40)
+        /*world = new WorldBuilder(20, 40)
                 .makeCaves()
-                .build();
+                .build();*/
     }
 
     public void initGame(){

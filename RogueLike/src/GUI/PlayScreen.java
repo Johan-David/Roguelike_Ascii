@@ -1,5 +1,7 @@
 package GUI;
 
+import Utility.Creature;
+import Utility.CreatureFactory;
 import Utility.World;
 import Utility.WorldBuilder;
 import asciiPanel.AsciiPanel;
@@ -13,13 +15,19 @@ public class PlayScreen implements Screen {
     private int screenWidth;
     private int screenHeight;
     private int horizontalMarge;
+    private Creature player;
 
     public PlayScreen(){
         screenWidth = 80;
         screenHeight = 40;
         horizontalMarge = 0;
         createWorld();
+        createCreature();
+    }
 
+    private void createCreature(){
+        CreatureFactory creatureFactory = new CreatureFactory(world);
+        player = creatureFactory.newPlayer();
     }
 
     private void createWorld(){
@@ -48,8 +56,7 @@ public class PlayScreen implements Screen {
 
         displayTiles(terminal, left, top);
 
-        terminal.write('X', centerX - left + horizontalMarge, centerY - top);
-
+        terminal.write(player.glyph(), player.x - left, player.y - top, player.color());
         terminal.writeCenter("-- press [escape] to lose or [enter] to win --", 38);
     }
 
@@ -76,17 +83,17 @@ public class PlayScreen implements Screen {
         switch (key.getKeyCode()){
             case KeyEvent.VK_ENTER: return new StartScreen();
             case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_H: scrollBy(-1, 0); break;
+            case KeyEvent.VK_H: player.moveBy(-1, 0); break;
             case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_L: scrollBy( 1, 0); break;
+            case KeyEvent.VK_L: player.moveBy( 1, 0); break;
             case KeyEvent.VK_UP:
-            case KeyEvent.VK_K: scrollBy( 0,-1); break;
+            case KeyEvent.VK_K: player.moveBy( 0,-1); break;
             case KeyEvent.VK_DOWN:
-            case KeyEvent.VK_J: scrollBy( 0, 1); break;
-            case KeyEvent.VK_Y: scrollBy(-1,-1); break;
-            case KeyEvent.VK_U: scrollBy( 1,-1); break;
-            case KeyEvent.VK_B: scrollBy(-1, 1); break;
-            case KeyEvent.VK_N: scrollBy( 1, 1); break;
+            case KeyEvent.VK_J: player.moveBy( 0, 1); break;
+            case KeyEvent.VK_Y: player.moveBy(-1,-1); break;
+            case KeyEvent.VK_U: player.moveBy( 1,-1); break;
+            case KeyEvent.VK_B: player.moveBy(-1, 1); break;
+            case KeyEvent.VK_N: player.moveBy( 1, 1); break;
         }
 
         return this;

@@ -47,7 +47,7 @@ public class WorldBuilder {
     }
 
     public WorldBuilder makeCaves() {
-        return new CellularAutomata(width, height, 10).generateLevel();
-        //return new SpacePartioning(width, height).generateLevel();
+        //return new CellularAutomata(width, height, 10).generateLevel();
+        return new SpacePartioning(width, height).generateLevel();
     }
 }

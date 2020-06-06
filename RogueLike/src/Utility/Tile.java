@@ -18,4 +18,8 @@ public enum Tile {
         this.glyph = glyph;
         this.color = color;
     }
+
+    public Boolean isGround(){
+        return this != WALL;
+    }
 }
