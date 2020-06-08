@@ -1,5 +1,6 @@
 package GUI;
 
+import Infra.SaveSystem;
 import Utility.Creature;
 import Utility.CreatureFactory;
 import Utility.World;
@@ -7,6 +8,7 @@ import Utility.WorldBuilder;
 import asciiPanel.AsciiPanel;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class PlayScreen implements Screen {
     private World world;
@@ -94,6 +96,10 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_U: player.moveBy( 1,-1); break;
             case KeyEvent.VK_B: player.moveBy(-1, 1); break;
             case KeyEvent.VK_N: player.moveBy( 1, 1); break;
+            case KeyEvent.VK_S:    try {new SaveSystem().saveWorld(); } catch (IOException e) {
+                e.printStackTrace();
+            } break;
+
         }
 
         return this;
